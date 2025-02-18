@@ -15,15 +15,34 @@ std::string convToLower(std::string src)
     to a set of words based on the criteria given in the assignment **/
 std::set<std::string> parseStringToWords(string rawWords)
 {
+    rawWords = convToLower(rawWords);
+    std::set<std::string> keywords; // declaring a set of strings to be used to store the keywords
 
+    string currentWord; // used to store the rawWord in use
 
+    // using a for loop to go through the entire rawWord to find and seperate the word to a set of words
+    for ( int i = 0; i < rawWords.length(); i++) {
 
+        char c = rawWords[i]; // Gets the character from the string
 
+        // Checking if the character is a letter of a hyphen
+        if (isalnum(c)) {
+            currentWord += c; // stores the character to the current word
+        }
+        else { // checking the currentWord is an actual word
+            if (currentWord.length() >= 2) {
+                keywords.insert(currentWord); // set into keywords and making all words lowercase to remove case sensitivity
+            }
+            currentWord.clear(); // reset the currentWord after placed in keywords
+        }
+    }
 
+    // Safty checks 
+    if (currentWord.length() > 1) { // checking the currentWord is an actual word
+        keywords.insert(currentWord); // set into keywords and making all words lowercase to remove case sensitivity
+    }
 
-
-
-
+    return keywords;
 
 }
 

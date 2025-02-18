@@ -13,19 +13,30 @@
 template <typename T>
 std::set<T> setIntersection(std::set<T>& s1, std::set<T>& s2)
 {
+  std::set<T> ending; // keeping track of the final outcome
 
+    typename std::set<T>::const_iterator track1; // tracking the s1 and go through it
 
+    // go through the set and compare s1 and s2
+    for (track1 = s1.begin(); track1 != s1.end(); track1++) {
+        T item = *track1;
+        if (s2.find(item) != s2.end()) {
+            ending.insert(item);
+        }
+    }
 
-
+    return ending; // return the final
 
 }
+
 template <typename T>
 std::set<T> setUnion(std::set<T>& s1, std::set<T>& s2)
 {
+  std::set<T> ending = s1; // making ending equal to s1 to unionize later
 
+  ending.insert(s2.begin(), s2.end());
 
-
-
+  return ending; // return the final
 
 }
 
